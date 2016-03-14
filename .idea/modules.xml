@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SpeechRecognitionView.iml" filepath="$PROJECT_DIR$/SpeechRecognitionView.iml" />
+      <module fileurl="file://$PROJECT_DIR$/speechrecognitionview/speechrecognitionview.iml" filepath="$PROJECT_DIR$/speechrecognitionview/speechrecognitionview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/speechrecognitionview-sample/speechrecognitionview-sample.iml" filepath="$PROJECT_DIR$/speechrecognitionview-sample/speechrecognitionview-sample.iml" />
+    </modules>
+  </component>
+</project>
