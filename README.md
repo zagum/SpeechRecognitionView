@@ -137,11 +137,18 @@ int[] colors = {
 };
 recognitionProgressView.setColors(colors);
 ```
+
 Set custom bars heights: 
 ``` java
 int[] heights = {60, 76, 58, 80, 55};
 recognitionProgressView.setBarMaxHeightsInDp(heights);
 ```
+Don't forget to add permission to your AndroidManifest.xml file
+``` xml
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+```
+
+
 * Warning
 
 From [Android Documentation](http://developer.android.com/reference/android/speech/RecognitionListener.html#onRmsChanged(float))
