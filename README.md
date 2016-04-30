@@ -32,7 +32,7 @@ dependencies {
 
 * Xml file:
 
-Simply addthis view to your layout:
+Simply add view to your layout:
 
 ``` xml
 <com.zagum.speechrecognitionview.RecognitionProgressView
