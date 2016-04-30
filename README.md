@@ -5,6 +5,8 @@ Custom animation for Google Speech Recognizer.
 
 This library provides google now - style animation for speech recognition.
 
+![image](http://i.makeagif.com/media/4-30-2016/NB3I7e.gif)
+
 #Compatibility
 
 This library is compatible from API 15
