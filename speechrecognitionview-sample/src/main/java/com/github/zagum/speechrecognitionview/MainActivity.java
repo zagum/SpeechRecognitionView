@@ -1,12 +1,11 @@
 package com.github.zagum.speechrecognitionview;
 
-import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,12 +13,13 @@ import android.widget.Button;
 
 import com.zagum.speechrecognitionview.RecognitionProgressView;
 
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity implements RecognitionListener {
 
 	private static final String TAG = "MainActivity";
 
 	private SpeechRecognizer speechRecognizer;
-	private int streamVolume;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,20 +27,16 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 		setContentView(R.layout.activity_main);
 
 		int[] colors = {
-				getResources().getColor(R.color.color1),
-				getResources().getColor(R.color.color2),
-				getResources().getColor(R.color.color3),
-				getResources().getColor(R.color.color4),
-				getResources().getColor(R.color.color5)
+				ContextCompat.getColor(this, R.color.color1),
+				ContextCompat.getColor(this, R.color.color2),
+				ContextCompat.getColor(this, R.color.color3),
+				ContextCompat.getColor(this, R.color.color4),
+				ContextCompat.getColor(this, R.color.color5)
 		};
 
-		int[] heights = {60, 76, 44, 80, 55};
+		int[] heights = {60, 76, 58, 80, 55};
 
 		speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
-		speechRecognizer.setRecognitionListener(this);
-
-		AudioManager amanager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-		amanager.setStreamMute(AudioManager.STREAM_MUSIC, true);
 
 		final RecognitionProgressView recognitionProgressView = (RecognitionProgressView) findViewById(R.id.recognition_view);
 		recognitionProgressView.setSpeechRecognizer(speechRecognizer);
@@ -56,16 +52,6 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 			@Override
 			public void onClick(View v) {
 				startRecognition();
-				recognitionProgressView.postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						startRecognition();
-					}
-				}, 100);
-				startRecognition();
-				AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-				streamVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-				audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, 0);
 			}
 		});
 
@@ -102,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
 	@Override
 	public void onBufferReceived(byte[] buffer) {
-		Log.d(TAG, "onBufferReceived() called with: " + "buffer = [" + buffer + "]");
+		Log.d(TAG, "onBufferReceived() called with: " + "buffer = [" + Arrays.toString(buffer) + "]");
 	}
 
 	@Override
@@ -117,8 +103,6 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
 	@Override
 	public void onResults(Bundle results) {
-		AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, streamVolume, 0);
 		Log.d(TAG, "onResults() called with: " + "results = [" + results + "]");
 	}
 
