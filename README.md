@@ -5,10 +5,26 @@ Custom animation for Google Speech Recognizer.
 
 This library provides google now - style animation for speech recognition.
 
-
 #Compatibility
 
 This library is compatible from API 15
+
+#Gradle
+
+Add the following to your project build.gradle
+``` xml
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+dependencies {
+    compile 'com.github.zagum:SpeechRecognitionView:1.0'
+}
+```
+
 
 #Usage
 
