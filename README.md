@@ -23,7 +23,7 @@ allprojects {
 }
 
 dependencies {
-    compile 'com.github.zagum:SpeechRecognitionView:1.0'
+    compile 'com.github.zagum:SpeechRecognitionView:1.0.1'
 }
 ```
 
