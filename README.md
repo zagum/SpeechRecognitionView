@@ -47,7 +47,7 @@ Usage
 Simply add view to your layout:
 
 ``` xml
-<com.zagum.speechrecognitionview.RecognitionProgressView
+<com.github.zagum.speechrecognitionview.RecognitionProgressView
 	android:id="@+id/recognition_view"
 	android:layout_width="wrap_content"
 	android:layout_height="wrap_content"
@@ -57,60 +57,51 @@ Simply add view to your layout:
 
 Init speech recognizer:
 ``` java
-SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
+SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(context);
 ```
 
 Init RecognitionProgressView:
 ``` java
-final RecognitionProgressView recognitionProgressView = (RecognitionProgressView) findViewById(R.id.recognition_view);
+RecognitionProgressView recognitionProgressView = (RecognitionProgressView) findViewById(R.id.recognition_view);
 recognitionProgressView.setSpeechRecognizer(speechRecognizer);
-recognitionProgressView.setRecognitionListener(this);
+recognitionProgressView.setRecognitionListener(recognitionListener);
 ```
 Recognition listener is ```android.speech.RecognitionListener ```:
 ``` java
 @Override
 public void onReadyForSpeech(Bundle params) {
-	Log.d(TAG, "onReadyForSpeech() called with: " + "params = [" + params + "]");
 }
 
 @Override
 public void onBeginningOfSpeech() {
-	Log.d(TAG, "onBeginningOfSpeech() called with: " + "");
 }
 
 @Override
 public void onRmsChanged(float rmsdB) {
-	Log.d(TAG, "onRmsChanged() called with: " + "rmsdB = [" + rmsdB + "]");
 }
 
 @Override
 public void onBufferReceived(byte[] buffer) {
-	Log.d(TAG, "onBufferReceived() called with: " + "buffer = [" + Arrays.toString(buffer) + "]");
 }
 
 @Override
 public void onEndOfSpeech() {
-	Log.d(TAG, "onEndOfSpeech() called with: " + "");
 }
 
 @Override
 public void onError(int error) {
-	Log.d(TAG, "onError() called with: " + "error = [" + error + "]");
 }
 
 @Override
 public void onResults(Bundle results) {
-	Log.d(TAG, "onResults() called with: " + "results = [" + results + "]");
 }
 
 @Override
 public void onPartialResults(Bundle partialResults) {
-	Log.d(TAG, "onPartialResults() called with: " + "partialResults = [" + partialResults + "]");
 }
 
 @Override
 public void onEvent(int eventType, Bundle params) {
-	Log.d(TAG, "onEvent() called with: " + "eventType = [" + eventType + "], params = [" + params + "]");
 }
 ```
 
