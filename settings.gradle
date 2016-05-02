@@ -1,1 +1,2 @@
-include ':speechrecognitionview-sample', ':speechrecognitionview'
+include ':speechrecognitionview'
+include ':speechrecognitionview-sample'
