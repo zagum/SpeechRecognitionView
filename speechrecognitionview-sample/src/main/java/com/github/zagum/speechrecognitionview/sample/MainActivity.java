@@ -28,10 +28,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
+import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter;
 
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements RecognitionListener {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private SpeechRecognizer speechRecognizer;
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
         final RecognitionProgressView recognitionProgressView = (RecognitionProgressView) findViewById(R.id.recognition_view);
         recognitionProgressView.setSpeechRecognizer(speechRecognizer);
-        recognitionProgressView.setRecognitionListener(this);
+        recognitionProgressView.setRecognitionListener(new RecognitionListenerAdapter() {});
         recognitionProgressView.setColors(colors);
         recognitionProgressView.setBarMaxHeightsInDp(heights);
         recognitionProgressView.play();
@@ -90,50 +91,5 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         speechRecognizer.startListening(intent);
-    }
-
-    @Override
-    public void onReadyForSpeech(Bundle params) {
-        Log.d(TAG, "onReadyForSpeech() called with: " + "params = [" + params + "]");
-    }
-
-    @Override
-    public void onBeginningOfSpeech() {
-        Log.d(TAG, "onBeginningOfSpeech() called with: " + "");
-    }
-
-    @Override
-    public void onRmsChanged(float rmsdB) {
-        Log.d(TAG, "onRmsChanged() called with: " + "rmsdB = [" + rmsdB + "]");
-    }
-
-    @Override
-    public void onBufferReceived(byte[] buffer) {
-        Log.d(TAG, "onBufferReceived() called with: " + "buffer = [" + Arrays.toString(buffer) + "]");
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-        Log.d(TAG, "onEndOfSpeech() called with: " + "");
-    }
-
-    @Override
-    public void onError(int error) {
-        Log.d(TAG, "onError() called with: " + "error = [" + error + "]");
-    }
-
-    @Override
-    public void onResults(Bundle results) {
-        Log.d(TAG, "onResults() called with: " + "results = [" + results + "]");
-    }
-
-    @Override
-    public void onPartialResults(Bundle partialResults) {
-        Log.d(TAG, "onPartialResults() called with: " + "partialResults = [" + partialResults + "]");
-    }
-
-    @Override
-    public void onEvent(int eventType, Bundle params) {
-        Log.d(TAG, "onEvent() called with: " + "eventType = [" + eventType + "], params = [" + params + "]");
     }
 }
