@@ -157,6 +157,22 @@ From [Android Documentation](http://developer.android.com/reference/android/spee
 For ```java public abstract void onRmsChanged (float rmsdB)``` callback ```There is no guarantee that this method will be called.```, 
 so if this callback does not return values the Bars animation will be skipped. 
 
+I found some hack to make it working every time you want to start speech recognition:
+``` java
+listen.setOnClickListener(new View.OnClickListener() {
+	@Override
+	public void onClick(View v) {
+		startRecognition();
+		recognitionProgressView.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				startRecognition();
+			}
+		}, 100);
+	}
+});
+```
+
 
 #Licence
 
