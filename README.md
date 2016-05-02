@@ -5,16 +5,34 @@ Custom animation for Google Speech Recognizer.
 
 This library provides google now - style animation for speech recognition.
 
+![image](http://i.makeagif.com/media/4-30-2016/NB3I7e.gif)
 
 #Compatibility
 
 This library is compatible from API 15
 
+#Gradle
+
+Add the following to your project build.gradle
+``` xml
+allprojects {
+    repositories {
+        jcenter()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+dependencies {
+    compile 'com.github.zagum:SpeechRecognitionView:1.0'
+}
+```
+
+
 #Usage
 
 * Xml file:
 
-Simply addthis view to your layout:
+Simply add view to your layout:
 
 ``` xml
 <com.zagum.speechrecognitionview.RecognitionProgressView
@@ -121,11 +139,18 @@ int[] colors = {
 };
 recognitionProgressView.setColors(colors);
 ```
+
 Set custom bars heights: 
 ``` java
 int[] heights = {60, 76, 58, 80, 55};
 recognitionProgressView.setBarMaxHeightsInDp(heights);
 ```
+Don't forget to add permission to your AndroidManifest.xml file
+``` xml
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+```
+
+
 * Warning
 
 From [Android Documentation](http://developer.android.com/reference/android/speech/RecognitionListener.html#onRmsChanged(float))
