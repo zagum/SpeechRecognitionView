@@ -49,15 +49,15 @@ Simply add view to your layout:
 ``` xml
 <com.zagum.speechrecognitionview.RecognitionProgressView
 	android:id="@+id/recognition_view"
-	android:layout_width="110dp"
-	android:layout_height="110dp"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:layout_gravity="center"/>
 ```
 * Initialization:
 
 Init speech recognizer:
 ``` java
-SpeechRecognizer speechRecognizer = (RecognitionProgressView) findViewById(R.id.recognition_view);
+SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 ```
 
 Init RecognitionProgressView:
