@@ -6,7 +6,7 @@ SpeechRecognitionView
 
 "Google Now" style animation for [Speech Recognizer][1].
 
-![image](http://i.imgur.com/kOJ9CbC.gif)
+![image](https://i.imgur.com/d9VGsW7.gif)
 
 
 Compatibility
