@@ -16,25 +16,30 @@
 
 package com.github.zagum.speechrecognitionview.sample;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.github.zagum.speechrecognitionview.RecognitionProgressView;
+import com.github.zagum.speechrecognitionview.adapters.RecognitionListenerAdapter;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements RecognitionListener {
+public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+	private static final int REQUEST_RECORD_AUDIO_PERMISSION_CODE = 1;
 
-    private SpeechRecognizer speechRecognizer;
+	private SpeechRecognizer speechRecognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +60,12 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
 
         final RecognitionProgressView recognitionProgressView = (RecognitionProgressView) findViewById(R.id.recognition_view);
         recognitionProgressView.setSpeechRecognizer(speechRecognizer);
-        recognitionProgressView.setRecognitionListener(this);
+        recognitionProgressView.setRecognitionListener(new RecognitionListenerAdapter() {
+	        @Override
+	        public void onResults(Bundle results) {
+		        showResults(results);
+	        }
+        });
         recognitionProgressView.setColors(colors);
         recognitionProgressView.setBarMaxHeightsInDp(heights);
         recognitionProgressView.play();
@@ -66,13 +76,19 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         listen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startRecognition();
-                recognitionProgressView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startRecognition();
-                    }
-                }, 100);
+	            if (ContextCompat.checkSelfPermission(MainActivity.this,
+			            Manifest.permission.RECORD_AUDIO)
+			            != PackageManager.PERMISSION_GRANTED) {
+		            requestPermission();
+	            } else {
+		            startRecognition();
+		            recognitionProgressView.postDelayed(new Runnable() {
+			            @Override
+			            public void run() {
+				            startRecognition();
+			            }
+		            }, 50);
+	            }
             }
         });
 
@@ -85,55 +101,36 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
         });
     }
 
-    private void startRecognition() {
+	@Override
+	protected void onDestroy() {
+		if (speechRecognizer != null) {
+			speechRecognizer.destroy();
+		}
+		super.onDestroy();
+	}
+
+	private void startRecognition() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en");
         speechRecognizer.startListening(intent);
     }
 
-    @Override
-    public void onReadyForSpeech(Bundle params) {
-        Log.d(TAG, "onReadyForSpeech() called with: " + "params = [" + params + "]");
-    }
+	private void showResults(Bundle results) {
+		ArrayList<String> matches = results
+				.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+		Toast.makeText(this, matches.get(0), Toast.LENGTH_LONG).show();
+	}
 
-    @Override
-    public void onBeginningOfSpeech() {
-        Log.d(TAG, "onBeginningOfSpeech() called with: " + "");
-    }
-
-    @Override
-    public void onRmsChanged(float rmsdB) {
-        Log.d(TAG, "onRmsChanged() called with: " + "rmsdB = [" + rmsdB + "]");
-    }
-
-    @Override
-    public void onBufferReceived(byte[] buffer) {
-        Log.d(TAG, "onBufferReceived() called with: " + "buffer = [" + Arrays.toString(buffer) + "]");
-    }
-
-    @Override
-    public void onEndOfSpeech() {
-        Log.d(TAG, "onEndOfSpeech() called with: " + "");
-    }
-
-    @Override
-    public void onError(int error) {
-        Log.d(TAG, "onError() called with: " + "error = [" + error + "]");
-    }
-
-    @Override
-    public void onResults(Bundle results) {
-        Log.d(TAG, "onResults() called with: " + "results = [" + results + "]");
-    }
-
-    @Override
-    public void onPartialResults(Bundle partialResults) {
-        Log.d(TAG, "onPartialResults() called with: " + "partialResults = [" + partialResults + "]");
-    }
-
-    @Override
-    public void onEvent(int eventType, Bundle params) {
-        Log.d(TAG, "onEvent() called with: " + "eventType = [" + eventType + "], params = [" + params + "]");
-    }
+	private void requestPermission() {
+		if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+				Manifest.permission.RECORD_AUDIO)) {
+			Toast.makeText(this, "Requires RECORD_AUDIO permission", Toast.LENGTH_SHORT).show();
+		} else {
+			ActivityCompat.requestPermissions(this,
+					new String[]{Manifest.permission.RECORD_AUDIO},
+					REQUEST_RECORD_AUDIO_PERMISSION_CODE);
+		}
+	}
 }
