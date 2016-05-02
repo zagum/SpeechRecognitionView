@@ -180,7 +180,7 @@ listen.setOnClickListener(new View.OnClickListener() {
 			public void run() {
 				startRecognition();
 			}
-		}, 100);
+		}, 50);
 	}
 });
 ```
