@@ -67,6 +67,12 @@ public class MainActivity extends AppCompatActivity implements RecognitionListen
             @Override
             public void onClick(View v) {
                 startRecognition();
+                recognitionProgressView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        startRecognition();
+                    }
+                }, 100);
             }
         });
 
