@@ -6,13 +6,13 @@ SpeechRecognitionView
 
 "Google Now" style animation for [Speech Recognizer][1].
 
-![image](http://i.imgur.com/kOJ9CbC.gif)
+![image](https://raw.githubusercontent.com/zagum/SpeechRecognitionView/master/art/speechrecognitionview.gif)
 
 
 Compatibility
 -------------
 
-This library is compatible from API 15.
+This library is compatible from API 15 (Android 4.0.3).
 
 
 Download
