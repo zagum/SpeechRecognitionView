@@ -6,13 +6,13 @@ SpeechRecognitionView
 
 "Google Now" style animation for [Speech Recognizer][1].
 
-![image](http://i.imgur.com/kOJ9CbC.gif)
+![image](https://raw.githubusercontent.com/zagum/SpeechRecognitionView/master/art/speechrecognitionview.gif)
 
 
 Compatibility
 -------------
 
-This library is compatible from API 15.
+This library is compatible from API 15 (Android 4.0.3).
 
 
 Download
@@ -49,15 +49,15 @@ Simply add view to your layout:
 ``` xml
 <com.zagum.speechrecognitionview.RecognitionProgressView
 	android:id="@+id/recognition_view"
-	android:layout_width="110dp"
-	android:layout_height="110dp"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
 	android:layout_gravity="center"/>
 ```
 * Initialization:
 
 Init speech recognizer:
 ``` java
-SpeechRecognizer speechRecognizer = (RecognitionProgressView) findViewById(R.id.recognition_view);
+SpeechRecognizer speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
 ```
 
 Init RecognitionProgressView:
@@ -180,7 +180,7 @@ listen.setOnClickListener(new View.OnClickListener() {
 			public void run() {
 				startRecognition();
 			}
-		}, 100);
+		}, 50);
 	}
 });
 ```
