@@ -23,6 +23,7 @@
         android:id="@+id/recognition_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="#c4c3c3"
         android:layout_gravity="center"/>
 
     <LinearLayout
