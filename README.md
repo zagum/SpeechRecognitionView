@@ -115,6 +115,14 @@ Set custom bars heights:
 int[] heights = {60, 76, 58, 80, 55};
 recognitionProgressView.setBarMaxHeightsInDp(heights);
 ```
+
+Set custom circle radius/spacing between circles/idle animation amolitude size/rotation animation radius: 
+``` java
+recognitionProgressView.setCircleRadiusInDp(2);
+recognitionProgressView.setSpacingInDp(2);
+recognitionProgressView.setIdleStateAmplitudeInDp(2);
+recognitionProgressView.setRotationRadiusInDp(10);
+```
 Don't forget to add permission to your AndroidManifest.xml file
 ``` xml
 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
