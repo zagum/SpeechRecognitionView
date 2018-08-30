@@ -34,7 +34,7 @@ Add the dependency
 
 ```groovy
 dependencies {
-    compile 'com.github.zagum:SpeechRecognitionView:1.2.1'
+    compile 'com.github.zagum:SpeechRecognitionView:1.2.2'
 }
 ```
 
