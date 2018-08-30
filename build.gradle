@@ -1,28 +1,29 @@
 buildscript {
-    repositories {
-        google()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
-    }
+  repositories {
+    google()
+    jcenter()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:3.1.4'
+  }
 }
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-    }
+  repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
 }
 
 ext {
-    minSdkVersion = 15
-    compileSdkVersion = 26
-    buildToolsVersion = '27.0.0'
+  minSdkVersion = 15
+  compileSdkVersion = 27
+  buildToolsVersion = '27.0.3'
 
-    supportAppCompat = 'com.android.support:appcompat-v7:27.0.0'
+  supportAppCompat = 'com.android.support:appcompat-v7:27.1.1'
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+  delete rootProject.buildDir
 }
