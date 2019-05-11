@@ -1,18 +1,23 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
 
 android {
-  compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.compileSdkVersion
 
-  defaultConfig {
-    applicationId "com.github.zagum.speechrecognitionview.sample"
-    minSdkVersion rootProject.ext.minSdkVersion
-    targetSdkVersion rootProject.ext.compileSdkVersion
-    versionCode 1
-    versionName "1.0"
-  }
+    defaultConfig {
+        applicationId "com.github.zagum.speechrecognitionview.sample"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.compileSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
 }
 
 dependencies {
-  implementation 'com.github.zagum:SpeechRecognitionView:1.2.2'
+    implementation 'com.github.zagum:SpeechRecognitionView:1.2.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}
+repositories {
+    mavenCentral()
 }

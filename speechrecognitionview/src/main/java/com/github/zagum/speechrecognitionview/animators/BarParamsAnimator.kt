@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.github.zagum.speechrecognitionview.animators;
+package com.github.zagum.speechrecognitionview.animators
 
-public interface BarParamsAnimator {
-    void start();
-    void stop();
-    void animate();
+interface BarParamsAnimator {
+    fun start()
+    fun stop()
+    fun animate()
 }
